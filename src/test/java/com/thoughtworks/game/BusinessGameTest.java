@@ -15,14 +15,12 @@ package com.thoughtworks.game;/*
  * OF USING, MODIFYING OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
  */
 
-import com.thoughtworks.game.BusinessGame;
+import com.thoughtworks.cell.CellFactory;
 import com.thoughtworks.player.Player;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.image.VolatileImage;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 
@@ -47,17 +45,15 @@ public class BusinessGameTest
         players.add(secondPlayer);
         businessGame = new BusinessGame(players);
     }
-
-    private void initialiseBoard(String[] boardInput)
+    private void initialiseBoard(String[] cells)
     {
-        ArrayList<String> board = new ArrayList<String>(Arrays.asList(boardInput));
-        businessGame.setBoard(board);
+        businessGame.setBoard(new CellFactory().createCells(cells));
     }
 
-    private void verifyRoll(String boardInput, int roll)
+    private void verifyRoll(int roll,int position)
     {
-        String cell = businessGame.roll(roll);
-        assertEquals(boardInput,cell);
+        businessGame.roll(roll);
+        assertEquals(position,firstPlayer.position());
     }
 
 
@@ -77,39 +73,38 @@ public class BusinessGameTest
     public void rollTwoAllEmptyBoard() throws Exception
     {
         initialiseBoard(new String[]{"E"});
-        verifyRoll("E", 2);
-    }
-
-    @Test
-    public void rollTwoAllHotelBoard() throws Exception
-    {
-        initialiseBoard(new String[]{"H"});
-        verifyRoll("H", 2);
+        verifyRoll(2,1);
     }
     @Test
     public void rollTwelve() throws Exception
     {
         initialiseBoard(new String[]{"J"});
-        verifyRoll("J",12);
+        verifyRoll(12,1);
     }
+
     @Test
     public void rollFiveOnAMixBoard() throws Exception
     {
         initialiseBoard(new String[]{"E","J","H","T","T","J"});
-        verifyRoll("T",5);
+        verifyRoll(5,5);
     }
     @Test
     public void rollWrapAround() throws Exception
     {
         initialiseBoard(new String[]{"E","J","H","T","T","J"});
-        verifyRoll("E",7);
+        verifyRoll(7,1);
+    }
+    @Test
+    public void rollLastPlace() throws Exception
+    {
+        initialiseBoard(new String[]{"E","J","H","T","T","J"});
+        verifyRoll(6,6);
     }
     @Test(expected = IllegalArgumentException.class)
     public void initialiseGameWithPlayers() throws Exception
     {
         new BusinessGame(new ArrayList<Player>());
     }
-
     @Test
     public void firstPlayerRollTwoTwos() throws Exception
     {

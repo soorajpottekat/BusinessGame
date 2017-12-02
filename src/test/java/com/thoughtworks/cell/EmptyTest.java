@@ -1,5 +1,6 @@
-package com.thoughtworks.player;
+package com.thoughtworks.cell;
 
+import com.thoughtworks.player.Player;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -26,33 +27,15 @@ import static org.junit.Assert.*;
  *
  * @author Sooraj Pottekat
  */
-public class PlayerTest
+public class EmptyTest
 {
     @Test
-    public void position() throws Exception
-    {
-        int position = new Player().position();
-        assertEquals(0,position);
-    }
-    @Test
-    public void movePlayer() throws Exception
+    public void land() throws Exception
     {
         Player player = new Player();
-        player.move(4);
-        assertEquals(4,player.position());
-    }
-    @Test
-    public void testInitialBalance() throws Exception
-    {
-        Player player = new Player();
+        Empty empty = new Empty();
+        empty.land(player);
         assertEquals(1000,player.getBalance());
-    }
-    @Test
-    public void addPositiveBalance() throws Exception
-    {
-        Player player = new Player();
-        player.updateBalance(200);
-        assertEquals(1200,player.getBalance());
     }
 
 }

@@ -1,9 +1,4 @@
-package com.thoughtworks.player;
-
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-
+package com.thoughtworks.cell;
 /*
  * Copyright (c) Multichoice Technical Operations. All Rights Reserved.
  *
@@ -21,38 +16,12 @@ import static org.junit.Assert.*;
  * OF USING, MODIFYING OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
  */
 
-/**
+import com.thoughtworks.player.Player; /**
  * Created by Sooraj.Pottekat on 12/2/2017.
  *
  * @author Sooraj Pottekat
  */
-public class PlayerTest
+public interface Cell
 {
-    @Test
-    public void position() throws Exception
-    {
-        int position = new Player().position();
-        assertEquals(0,position);
-    }
-    @Test
-    public void movePlayer() throws Exception
-    {
-        Player player = new Player();
-        player.move(4);
-        assertEquals(4,player.position());
-    }
-    @Test
-    public void testInitialBalance() throws Exception
-    {
-        Player player = new Player();
-        assertEquals(1000,player.getBalance());
-    }
-    @Test
-    public void addPositiveBalance() throws Exception
-    {
-        Player player = new Player();
-        player.updateBalance(200);
-        assertEquals(1200,player.getBalance());
-    }
-
+    void land(Player player);
 }

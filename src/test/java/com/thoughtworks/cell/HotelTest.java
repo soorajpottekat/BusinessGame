@@ -1,5 +1,6 @@
-package com.thoughtworks.player;
+package com.thoughtworks.cell;
 
+import com.thoughtworks.player.Player;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -26,33 +27,35 @@ import static org.junit.Assert.*;
  *
  * @author Sooraj Pottekat
  */
-public class PlayerTest
+public class HotelTest
 {
     @Test
-    public void position() throws Exception
-    {
-        int position = new Player().position();
-        assertEquals(0,position);
-    }
-    @Test
-    public void movePlayer() throws Exception
+    public void landNonOwnedHotel() throws Exception
     {
         Player player = new Player();
-        player.move(4);
-        assertEquals(4,player.position());
+        new Hotel().land(player);
+        assertEquals(800,player.getBalance());
     }
+
     @Test
-    public void testInitialBalance() throws Exception
+    public void landNonOwnedHotelWithNotEnoughBalance() throws Exception
     {
         Player player = new Player();
-        assertEquals(1000,player.getBalance());
+        player.updateBalance(-801);
+        new Hotel().land(player);
+        assertEquals(199,player.getBalance());
     }
+
     @Test
-    public void addPositiveBalance() throws Exception
+    public void landOnPreOwnedHotel() throws Exception
     {
-        Player player = new Player();
-        player.updateBalance(200);
-        assertEquals(1200,player.getBalance());
+        Player owner = new Player();
+        Player visitor = new Player();
+        Hotel hotel = new Hotel();
+        hotel.land(owner);
+        hotel.land(visitor);
+        assertEquals(950,visitor.getBalance());
+        assertEquals(850,owner.getBalance());
     }
 
 }

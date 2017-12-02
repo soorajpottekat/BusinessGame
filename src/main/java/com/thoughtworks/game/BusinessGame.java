@@ -16,6 +16,7 @@ package com.thoughtworks.game;
  * OF USING, MODIFYING OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
  */
 
+import com.thoughtworks.cell.Cell;
 import com.thoughtworks.player.Player;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 public class BusinessGame
 {
     private final ArrayList<Player> players;
-    private ArrayList<String> board;
+    private ArrayList<Cell> board;
     private int currentPlayerIndex;
     public BusinessGame(ArrayList<Player> players)
     {
@@ -38,26 +39,28 @@ public class BusinessGame
         currentPlayerIndex = 0;
     }
 
-    public void setBoard(ArrayList<String> board)
+    public void setBoard(ArrayList<Cell> board)
     {
         this.board = board;
     }
 
-    public String roll(int value)
+    public void roll(int roll)
     {
-        if(value < 2 || value > 12)
+        if(roll < 2 || roll > 12)
             throw new IllegalArgumentException("The value should be with in range 2-12");
-        int playerPosition = movePlayer(value);
-        selectNextPlayer();
-        return board.get((playerPosition - 1) % board.size());
-    }
-    private int movePlayer(int value)
-    {
         Player player = players.get(currentPlayerIndex);
         int lastPosition = player.position();
-        int playerPosition = lastPosition + value;
-        player.move(playerPosition);
-        return playerPosition;
+        movePlayer(player,roll,lastPosition);
+        board.get(player.position() -1).land(player);
+        selectNextPlayer();
+    }
+
+    private void movePlayer(Player player, int roll, int lastPosition)
+    {
+        int effectivePosition = lastPosition + roll % board.size();
+        effectivePosition = effectivePosition == 0 ? board.size() : effectivePosition;
+        player.move(effectivePosition);
+
     }
     private void selectNextPlayer()
     {

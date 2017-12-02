@@ -23,7 +23,13 @@ package com.thoughtworks.player;
  */
 public class Player
 {
+    private int balance;
     private int position;
+    public Player()
+    {
+        this.position = 0;
+        this.balance = 1000;
+    }
 
     public int position()
     {
@@ -33,5 +39,15 @@ public class Player
     public void move(int position)
     {
         this.position = position;
+    }
+
+    public int getBalance()
+    {
+        return balance;
+    }
+
+    public void updateBalance(int amount)
+    {
+        balance += amount;
     }
 }
