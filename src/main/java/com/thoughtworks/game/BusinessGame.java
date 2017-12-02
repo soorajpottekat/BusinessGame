@@ -16,6 +16,8 @@ package com.thoughtworks.game;
  * OF USING, MODIFYING OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
  */
 
+import com.thoughtworks.player.Player;
+
 import java.util.ArrayList;
 
 /**
@@ -25,16 +27,40 @@ import java.util.ArrayList;
  */
 public class BusinessGame
 {
-    private static ArrayList<String> board;
-    public static void setBoard(ArrayList<String> board)
+    private final ArrayList<Player> players;
+    private ArrayList<String> board;
+    private int currentPlayerIndex;
+    public BusinessGame(ArrayList<Player> players)
     {
-        BusinessGame.board = board;
+        if(players.size() < 2)
+            throw new IllegalArgumentException("Minimum two players required to start the game");
+        this.players = players;
+        currentPlayerIndex = 0;
+    }
+
+    public void setBoard(ArrayList<String> board)
+    {
+        this.board = board;
     }
 
     public String roll(int value)
     {
         if(value < 2 || value > 12)
             throw new IllegalArgumentException("The value should be with in range 2-12");
-        return board.get((value - 1) % board.size());
+        int playerPosition = movePlayer(value);
+        selectNextPlayer();
+        return board.get((playerPosition - 1) % board.size());
+    }
+    private int movePlayer(int value)
+    {
+        Player player = players.get(currentPlayerIndex);
+        int lastPosition = player.position();
+        int playerPosition = lastPosition + value;
+        player.move(playerPosition);
+        return playerPosition;
+    }
+    private void selectNextPlayer()
+    {
+        currentPlayerIndex = ++currentPlayerIndex%players.size();
     }
 }

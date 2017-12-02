@@ -16,8 +16,11 @@ package com.thoughtworks.game;/*
  */
 
 import com.thoughtworks.game.BusinessGame;
+import com.thoughtworks.player.Player;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.awt.image.VolatileImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -30,28 +33,44 @@ import static org.junit.Assert.assertEquals;
  */
 public class BusinessGameTest
 {
+    private BusinessGame businessGame;
+    private Player firstPlayer;
+    private Player secondPlayer;
+
+    @Before
+    public void setUp()
+    {
+        ArrayList<Player> players = new ArrayList<Player>();
+        firstPlayer = new Player();
+        secondPlayer = new Player();
+        players.add(firstPlayer);
+        players.add(secondPlayer);
+        businessGame = new BusinessGame(players);
+    }
+
     private void initialiseBoard(String[] boardInput)
     {
         ArrayList<String> board = new ArrayList<String>(Arrays.asList(boardInput));
-        BusinessGame.setBoard(board);
+        businessGame.setBoard(board);
     }
 
     private void verifyRoll(String boardInput, int roll)
     {
-        String cell = new BusinessGame().roll(roll);
+        String cell = businessGame.roll(roll);
         assertEquals(boardInput,cell);
     }
+
 
     @Test(expected = IllegalArgumentException.class)
     public void rollInvalidZero() throws Exception
     {
-        new BusinessGame().roll(0);
+        businessGame.roll(0);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void rollInvalidTwenty() throws Exception
     {
-        new BusinessGame().roll(20);
+        businessGame.roll(20);
     }
 
     @Test
@@ -84,5 +103,29 @@ public class BusinessGameTest
     {
         initialiseBoard(new String[]{"E","J","H","T","T","J"});
         verifyRoll("E",7);
+    }
+    @Test(expected = IllegalArgumentException.class)
+    public void initialiseGameWithPlayers() throws Exception
+    {
+        new BusinessGame(new ArrayList<Player>());
+    }
+
+    @Test
+    public void firstPlayerRollTwoTwos() throws Exception
+    {
+        initialiseBoard(new String[]{"E","J","H","T","T","J"});
+        businessGame.roll(2);
+        businessGame.roll(2);
+        businessGame.roll(2);
+        assertEquals(4,firstPlayer.position());
+    }
+
+    @Test
+    public void secondPlayerRollsOneTwo() throws Exception
+    {
+        initialiseBoard(new String[]{"E","J","H","T","T","J"});
+        businessGame.roll(2);
+        businessGame.roll(2);
+        assertEquals(2,secondPlayer.position());
     }
 }
