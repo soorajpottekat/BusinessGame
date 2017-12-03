@@ -34,7 +34,7 @@ public class HotelTest
     {
         Player player = new Player();
         new Hotel().land(player);
-        assertEquals(800,player.getBalance());
+        assertEquals(800,player.accountBalance());
     }
 
     @Test
@@ -43,7 +43,7 @@ public class HotelTest
         Player player = new Player();
         player.updateBalance(-801);
         new Hotel().land(player);
-        assertEquals(199,player.getBalance());
+        assertEquals(199,player.accountBalance());
     }
 
     @Test
@@ -54,8 +54,8 @@ public class HotelTest
         Hotel hotel = new Hotel();
         hotel.land(owner);
         hotel.land(visitor);
-        assertEquals(950,visitor.getBalance());
-        assertEquals(850,owner.getBalance());
+        assertEquals(950,visitor.accountBalance());
+        assertEquals(850,owner.accountBalance());
     }
 
 }

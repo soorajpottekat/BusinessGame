@@ -1,10 +1,4 @@
-package com.thoughtworks.cell;
-
-import com.thoughtworks.player.Player;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-
+package com.thoughtworks.player;
 /*
  * Copyright (c) Multichoice Technical Operations. All Rights Reserved.
  *
@@ -23,19 +17,11 @@ import static org.junit.Assert.*;
  */
 
 /**
- * Created by Sooraj.Pottekat on 12/2/2017.
+ * Created by Sooraj.Pottekat on 12/3/2017.
  *
  * @author Sooraj Pottekat
  */
-public class EmptyTest
+public interface Purchasable
 {
-    @Test
-    public void land() throws Exception
-    {
-        Player player = new Player();
-        Empty empty = new Empty();
-        empty.land(player);
-        assertEquals(1000,player.accountBalance());
-    }
-
+    int getValue();
 }

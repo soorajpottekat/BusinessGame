@@ -123,4 +123,21 @@ public class BusinessGameTest
         businessGame.roll(2);
         assertEquals(2,secondPlayer.position());
     }
+    @Test
+    public void landOnHotelAndEffectiveBalanceIsSame() throws Exception
+    {
+        initialiseBoard(new String[]{"E","H","H","T","T","J"});
+        businessGame.roll(2);
+        assertEquals(firstPlayer.effectiveBalance(),1000);
+    }
+
+    @Test
+    public void landsOnPreOwnedHotel() throws Exception
+    {
+        initialiseBoard(new String[]{"E","H","H","T","T","J"});
+        businessGame.roll(2);
+        businessGame.roll(2);
+        assertEquals(firstPlayer.effectiveBalance(),1050);
+        assertEquals(secondPlayer.accountBalance(),950);
+    }
 }

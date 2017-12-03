@@ -28,6 +28,19 @@ import static org.junit.Assert.*;
  */
 public class PlayerTest
 {
+
+    private Purchasable getPurchasableItem(final int value)
+    {
+        Purchasable purchasable = new Purchasable()
+        {
+            public int getValue()
+            {
+                return value;
+            }
+        };
+        return purchasable;
+    }
+
     @Test
     public void position() throws Exception
     {
@@ -45,14 +58,33 @@ public class PlayerTest
     public void testInitialBalance() throws Exception
     {
         Player player = new Player();
-        assertEquals(1000,player.getBalance());
+        assertEquals(1000,player.accountBalance());
     }
     @Test
     public void addPositiveBalance() throws Exception
     {
         Player player = new Player();
         player.updateBalance(200);
-        assertEquals(1200,player.getBalance());
+        assertEquals(1200,player.accountBalance());
     }
-
+    @Test
+    public void buyItem() throws Exception
+    {
+        Player player = new Player();
+        Purchasable purchasableItem = getPurchasableItem(200);
+        player.purchaseItem(purchasableItem);
+        assertEquals(1000,player.effectiveBalance());
+        assertEquals(800,player.accountBalance());
+    }
+    @Test
+    public void buyMultipleItem() throws Exception
+    {
+        Player player = new Player();
+        Purchasable purchasableItem1 = getPurchasableItem(200);
+        Purchasable purchasableItem2 = getPurchasableItem(300);
+        player.purchaseItem(purchasableItem1);
+        player.purchaseItem(purchasableItem2);
+        assertEquals(1000,player.effectiveBalance());
+        assertEquals(500,player.accountBalance());
+    }
 }

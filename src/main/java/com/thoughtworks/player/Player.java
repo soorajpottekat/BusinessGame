@@ -16,6 +16,8 @@ package com.thoughtworks.player;
  * OF USING, MODIFYING OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
  */
 
+import java.util.ArrayList;
+
 /**
  * Created by Sooraj.Pottekat on 12/2/2017.
  *
@@ -25,10 +27,12 @@ public class Player
 {
     private int balance;
     private int position;
+    private ArrayList<Purchasable> ownedItems;
     public Player()
     {
         this.position = 0;
         this.balance = 1000;
+        this.ownedItems = new ArrayList<Purchasable>();
     }
 
     public int position()
@@ -41,7 +45,7 @@ public class Player
         this.position = position;
     }
 
-    public int getBalance()
+    public int accountBalance()
     {
         return balance;
     }
@@ -49,5 +53,21 @@ public class Player
     public void updateBalance(int amount)
     {
         balance += amount;
+    }
+
+    public void purchaseItem(Purchasable item)
+    {
+        balance -= item.getValue();
+        ownedItems.add(item);
+    }
+
+    public int effectiveBalance()
+    {
+        int effectiveBalance=balance;
+        for (Purchasable item:ownedItems)
+        {
+            effectiveBalance += item.getValue();
+        }
+        return effectiveBalance;
     }
 }

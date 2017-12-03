@@ -1,10 +1,4 @@
-package com.thoughtworks.cell;
-
-import com.thoughtworks.player.Player;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-
+package com.thoughtworks;
 /*
  * Copyright (c) Multichoice Technical Operations. All Rights Reserved.
  *
@@ -22,20 +16,29 @@ import static org.junit.Assert.*;
  * OF USING, MODIFYING OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
  */
 
-/**
- * Created by Sooraj.Pottekat on 12/2/2017.
- *
- * @author Sooraj Pottekat
- */
-public class EmptyTest
-{
-    @Test
-    public void land() throws Exception
-    {
-        Player player = new Player();
-        Empty empty = new Empty();
-        empty.land(player);
-        assertEquals(1000,player.accountBalance());
-    }
+import com.thoughtworks.cell.CellFactoryTest;
+import com.thoughtworks.cell.EmptyTest;
+import com.thoughtworks.cell.HotelTest;
+import com.thoughtworks.cell.JailTest;
+import com.thoughtworks.game.BusinessGameTest;
+import com.thoughtworks.player.PlayerTest;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
+/**
+ * Created by soorajpottekat on 30/03/17.
+ */
+@RunWith(Suite.class)
+
+@SuiteClasses({
+        BusinessGameTest.class,
+        PlayerTest.class,
+        CellFactoryTest.class,
+        EmptyTest.class,
+        HotelTest.class,
+        JailTest.class
+})
+public class TestSuite
+{
 }

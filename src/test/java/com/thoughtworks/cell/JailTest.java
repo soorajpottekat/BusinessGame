@@ -34,7 +34,7 @@ public class JailTest
     {
         Player player = new Player();
         new Jail().land(player);
-        assertEquals(850,player.getBalance());
+        assertEquals(850,player.accountBalance());
     }
 
 }

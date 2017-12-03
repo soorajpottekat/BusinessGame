@@ -17,20 +17,21 @@ package com.thoughtworks.cell;
  */
 
 import com.thoughtworks.player.Player;
+import com.thoughtworks.player.Purchasable;
 
 /**
  * Created by Sooraj.Pottekat on 12/2/2017.
  *
  * @author Sooraj Pottekat
  */
-public class Hotel implements Cell
+public class Hotel implements Cell,Purchasable
 {
     private Player owner;
     public void land(Player player)
     {
         if(canBuy(player))
         {
-            player.updateBalance(-200);
+            player.purchaseItem(this);
             this.owner = player;
         }
         else if(owner!= null && !player.equals(owner))
@@ -43,6 +44,11 @@ public class Hotel implements Cell
 
     private boolean canBuy(Player player)
     {
-        return owner == null && player.getBalance() >= 200;
+        return owner == null && player.accountBalance() >= 200;
+    }
+
+    public int getValue()
+    {
+        return 200;
     }
 }
