@@ -22,6 +22,8 @@ import com.thoughtworks.cell.HotelTest;
 import com.thoughtworks.cell.JailTest;
 import com.thoughtworks.game.BusinessGameTest;
 import com.thoughtworks.player.PlayerTest;
+import com.thoughtworks.settings.Settings;
+import com.thoughtworks.settings.SettingsTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -37,7 +39,8 @@ import org.junit.runners.Suite.SuiteClasses;
         CellFactoryTest.class,
         EmptyTest.class,
         HotelTest.class,
-        JailTest.class
+        JailTest.class,
+        SettingsTest.class
 })
 public class TestSuite
 {
