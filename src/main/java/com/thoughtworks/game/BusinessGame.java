@@ -20,6 +20,7 @@ import com.thoughtworks.cell.Cell;
 import com.thoughtworks.player.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sooraj.Pottekat on 11/28/2017.
@@ -28,19 +29,15 @@ import java.util.ArrayList;
  */
 public class BusinessGame
 {
-    private final ArrayList<Player> players;
-    private ArrayList<Cell> board;
+    private final List<Player> players;
+    private List<Cell> board;
     private int currentPlayerIndex;
-    public BusinessGame(ArrayList<Player> players)
+    public BusinessGame(List<Cell> board, List<Player> players)
     {
         if(players.size() < 2)
             throw new IllegalArgumentException("Minimum two players required to start the game");
         this.players = players;
         currentPlayerIndex = 0;
-    }
-
-    public void setBoard(ArrayList<Cell> board)
-    {
         this.board = board;
     }
 
@@ -49,15 +46,14 @@ public class BusinessGame
         if(roll < 2 || roll > 12)
             throw new IllegalArgumentException("The value should be with in range 2-12");
         Player player = players.get(currentPlayerIndex);
-        int lastPosition = player.position();
-        movePlayer(player,roll,lastPosition);
+        movePlayer(player,roll,player.position());
         board.get(player.position() -1).land(player);
         selectNextPlayer();
     }
 
     private void movePlayer(Player player, int roll, int lastPosition)
     {
-        int effectivePosition = lastPosition + roll % board.size();
+        int effectivePosition = (lastPosition + roll) % board.size();
         effectivePosition = effectivePosition == 0 ? board.size() : effectivePosition;
         player.move(effectivePosition);
 

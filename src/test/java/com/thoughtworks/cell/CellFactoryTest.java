@@ -3,6 +3,8 @@ package com.thoughtworks.cell;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -34,7 +36,7 @@ public class CellFactoryTest
     public void createCellsWithNullInput() throws Exception
     {
         ArrayList<Cell> expected = new ArrayList<Cell>();
-        ArrayList<Cell> actual = new CellFactory().createCells(null);
+        List<Cell> actual = new CellFactory().createCells(null);
         assertEquals(expected,actual);
     }
 
@@ -42,44 +44,44 @@ public class CellFactoryTest
     public void createCellsWithEmptyInput() throws Exception
     {
         ArrayList<Cell> expected = new ArrayList<Cell>();
-        ArrayList<Cell> actual = new CellFactory().createCells(new String []{});
+        List<Cell> actual = new CellFactory().createCells(new ArrayList<String>());
         assertEquals(expected,actual);
     }
     @Test(expected = IllegalArgumentException.class)
     public void invalidInput() throws Exception
     {
-        new CellFactory().createCells(new String []{"K"});
+        new CellFactory().createCells(Arrays.asList("K"));
     }
 
     @Test
     public void oneEmptyCellInput() throws Exception
     {
-        ArrayList<Cell> actual = new CellFactory().createCells(new String []{"E"});
+        List<Cell> actual = new CellFactory().createCells(Arrays.asList("E"));
         assertTrue(actual.get(0) instanceof Empty);
     }
     @Test
     public void oneTreasureCellInput() throws Exception
     {
-        ArrayList<Cell> actual = new CellFactory().createCells(new String []{"T"});
+        List<Cell> actual = new CellFactory().createCells(Arrays.asList("T"));
         assertTrue(actual.get(0) instanceof Treasure);
     }
     @Test
     public void oneJailCellInput() throws Exception
     {
-        ArrayList<Cell> actual = new CellFactory().createCells(new String []{"J"});
+        List<Cell> actual = new CellFactory().createCells(Arrays.asList("J"));
         assertTrue(actual.get(0) instanceof Jail);
     }
     @Test
     public void oneHotelInput() throws Exception
     {
-        ArrayList<Cell> actual = new CellFactory().createCells(new String []{"H"});
+        List<Cell> actual = new CellFactory().createCells(Arrays.asList("H"));
         assertTrue(actual.get(0) instanceof Hotel);
     }
 
     @Test
     public void mixedInputsTest() throws Exception
     {
-        ArrayList<Cell> actual = new CellFactory().createCells(new String []{"H","T","J","E"});
+        List<Cell> actual = new CellFactory().createCells(Arrays.asList("H","T","J","E"));
         assertTrue(actual.get(0) instanceof Hotel);
         assertTrue(actual.get(1) instanceof Treasure);
         assertTrue(actual.get(2) instanceof Jail);

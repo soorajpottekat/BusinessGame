@@ -18,6 +18,7 @@ package com.thoughtworks.cell;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Sooraj.Pottekat on 12/2/2017.
@@ -26,28 +27,26 @@ import java.util.ArrayList;
  */
 public class CellFactory
 {
-    public ArrayList<Cell> createCells(String[] inputs)
+    public List<Cell> createCells(List<String> inputs)
     {
         ArrayList<Cell> cells = new ArrayList<Cell>();
         if (inputs == null)
             return cells;
-        for (int i = 0; i < inputs.length; i++)
-        {
-            createOneCell(inputs[i], cells);
-        }
+        for (String input : inputs)
+            cells.add(createOneCell(input));
         return cells;
     }
 
-    private void createOneCell(String input, ArrayList<Cell> cells)
+    private Cell createOneCell(String input)
     {
         if("E".equals(input))
-            cells.add(new Empty());
+            return new Empty();
         else if("T".equals(input))
-            cells.add(new Treasure());
+            return new Treasure();
         else if("J".equals(input))
-            cells.add(new Jail());
+            return new Jail();
         else if("H".equals(input))
-            cells.add(new Hotel());
+            return new Hotel();
         else
             throw new IllegalArgumentException("Invalid input to create cells : " + input);
     }

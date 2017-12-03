@@ -26,7 +26,9 @@ import com.thoughtworks.player.Purchasable;
  */
 public class Hotel implements Cell,Purchasable
 {
+    private final int value = 200;
     private Player owner;
+
     public void land(Player player)
     {
         if(canBuy(player))
@@ -44,11 +46,11 @@ public class Hotel implements Cell,Purchasable
 
     private boolean canBuy(Player player)
     {
-        return owner == null && player.accountBalance() >= 200;
+        return owner == null && player.accountBalance() >= value;
     }
 
     public int getValue()
     {
-        return 200;
+        return value;
     }
 }
