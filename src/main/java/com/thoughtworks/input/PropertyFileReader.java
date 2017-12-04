@@ -16,6 +16,7 @@ package com.thoughtworks.input;
  * OF USING, MODIFYING OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
  */
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
@@ -40,11 +41,13 @@ public class PropertyFileReader
         Properties prop = new Properties();
         try
         {
+            if(!new File(filePath).exists())
+                throw new IllegalArgumentException("File not present in the location : "+filePath);
             prop.load(new FileInputStream(filePath));
         }
         catch (IOException e)
         {
-            throw new IllegalArgumentException("Invalid file path IO Exception occurred");
+            throw new IllegalArgumentException("Invalid file path IO Exception occurred Path : " + filePath );
         }
         return prop;
     }

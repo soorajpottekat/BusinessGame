@@ -21,6 +21,7 @@ import com.thoughtworks.cell.EmptyTest;
 import com.thoughtworks.cell.HotelTest;
 import com.thoughtworks.cell.JailTest;
 import com.thoughtworks.board.GameBoardTest;
+import com.thoughtworks.game.BusinessGameTest;
 import com.thoughtworks.input.PropertyFileReaderTest;
 import com.thoughtworks.output.ResultsPrinterTest;
 import com.thoughtworks.player.PlayerComparatorTest;
@@ -44,7 +45,9 @@ import org.junit.runners.Suite.SuiteClasses;
         JailTest.class,
         SettingsTest.class,
         PropertyFileReaderTest.class,
-        ResultsPrinterTest.class
+        ResultsPrinterTest.class,
+        PlayerComparatorTest.class,
+        BusinessGameTest.class
 })
 public class TestSuite
 {
