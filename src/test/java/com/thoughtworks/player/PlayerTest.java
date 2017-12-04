@@ -87,4 +87,14 @@ public class PlayerTest
         assertEquals(1000,player.effectiveBalance());
         assertEquals(500,player.accountBalance());
     }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void maximumChances() throws Exception
+    {
+        Player player = new Player("");
+        for (int i = 0; i < 11; i++)
+        {
+            player.move(3);
+        }
+    }
 }

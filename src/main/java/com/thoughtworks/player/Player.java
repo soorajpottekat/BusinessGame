@@ -28,12 +28,16 @@ public class Player
     private final String name;
     private int balance;
     private int position;
+    private int chance;
+    private static final int MAX_CHANCE = 10;
     private ArrayList<Purchasable> ownedItems;
+
     public Player(String name)
     {
         this.position = 0;
         this.balance = 1000;
         this.name = name;
+        this.chance = 0;
         this.ownedItems = new ArrayList<Purchasable>();
     }
 
@@ -44,6 +48,9 @@ public class Player
 
     public void move(int position)
     {
+        if (chance == MAX_CHANCE)
+            throw new IllegalArgumentException("Maximum chances reached for player");
+        chance ++;
         this.position = position;
     }
 
@@ -65,8 +72,8 @@ public class Player
 
     public int effectiveBalance()
     {
-        int effectiveBalance=balance;
-        for (Purchasable item:ownedItems)
+        int effectiveBalance = balance;
+        for (Purchasable item : ownedItems)
         {
             effectiveBalance += item.getValue();
         }
