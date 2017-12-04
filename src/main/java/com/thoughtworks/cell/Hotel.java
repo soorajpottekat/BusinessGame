@@ -31,7 +31,7 @@ public class Hotel implements Cell,Purchasable
 
     public void land(Player player)
     {
-        if(canBuy(player))
+        if(owner == null && player.canBuy(this))
         {
             player.purchaseItem(this);
             this.owner = player;
@@ -41,12 +41,6 @@ public class Hotel implements Cell,Purchasable
             player.updateBalance(-50);
             owner.updateBalance(50);
         }
-
-    }
-
-    private boolean canBuy(Player player)
-    {
-        return owner == null && player.accountBalance() >= value;
     }
 
     public int getValue()

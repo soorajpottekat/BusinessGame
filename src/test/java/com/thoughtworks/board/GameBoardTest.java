@@ -15,7 +15,6 @@ package com.thoughtworks.board;/*
  * OF USING, MODIFYING OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
  */
 
-import com.thoughtworks.board.GameBoard;
 import com.thoughtworks.cell.Cell;
 import com.thoughtworks.cell.CellFactory;
 import com.thoughtworks.player.Player;

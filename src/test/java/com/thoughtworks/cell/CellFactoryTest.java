@@ -32,20 +32,24 @@ import static org.junit.Assert.*;
  */
 public class CellFactoryTest
 {
+    private void verifyEmptyValue(List<String> inputs)
+    {
+        ArrayList<Cell> expected = new ArrayList<Cell>();
+        List<Cell> actual = new CellFactory().createCells(inputs);
+        assertEquals(expected,actual);
+    }
+
     @Test
     public void createCellsWithNullInput() throws Exception
     {
-        ArrayList<Cell> expected = new ArrayList<Cell>();
-        List<Cell> actual = new CellFactory().createCells(null);
-        assertEquals(expected,actual);
+        List<String> inputs = null;
+        verifyEmptyValue(inputs);
     }
 
     @Test
     public void createCellsWithEmptyInput() throws Exception
     {
-        ArrayList<Cell> expected = new ArrayList<Cell>();
-        List<Cell> actual = new CellFactory().createCells(new ArrayList<String>());
-        assertEquals(expected,actual);
+        verifyEmptyValue(new ArrayList<String>());
     }
     @Test(expected = IllegalArgumentException.class)
     public void invalidInput() throws Exception

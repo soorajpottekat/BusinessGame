@@ -41,8 +41,6 @@ public class PropertyFileReader
         Properties prop = new Properties();
         try
         {
-            if(!new File(filePath).exists())
-                throw new IllegalArgumentException("File not present in the location : "+filePath);
             prop.load(new FileInputStream(filePath));
         }
         catch (IOException e)

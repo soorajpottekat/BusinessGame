@@ -31,7 +31,7 @@ public class Settings
     private final Map<Object, Object> input;
     private static final String CELLS = "cells";
     private static final String ROLLS = "rolls";
-    private static final String NUMBEROFPLAYERS = "numberOfPlayers";
+    private static final String NUMBER_OF_PLAYERS = "numberOfPlayers";
     public Settings(Map<Object, Object> input)
     {
         this.input = input;
@@ -72,7 +72,7 @@ public class Settings
 
     public Integer getNumberOfPlayers()
     {
-        String numberOfPlayers = (String) input.get(NUMBEROFPLAYERS);
+        String numberOfPlayers = (String) input.get(NUMBER_OF_PLAYERS);
         if (null == numberOfPlayers)
             return 0;
         return Integer.parseInt(numberOfPlayers);

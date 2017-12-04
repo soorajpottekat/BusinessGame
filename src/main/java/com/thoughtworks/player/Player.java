@@ -84,4 +84,9 @@ public class Player
     {
         return name;
     }
+
+    public boolean canBuy(Purchasable property)
+    {
+        return balance >= property.getValue();
+    }
 }

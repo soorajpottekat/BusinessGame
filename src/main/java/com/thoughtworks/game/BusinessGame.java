@@ -50,13 +50,12 @@ public class BusinessGame
             this.filePath = filePath;
     }
 
-
     public void start(Printer printer)
     {
         Settings settings = readSettings();
         List<Cell> cells = new CellFactory().createCells(settings.getCells());
         ArrayList<Player> players = createPlayers(settings.getNumberOfPlayers());
-        rollDice(settings, cells, players);
+        rollDice(settings, new GameBoard(cells, players));
         printResults(players, printer);
     }
 
@@ -74,9 +73,8 @@ public class BusinessGame
         return players;
     }
 
-    private void rollDice(Settings settings, List<Cell> cells, ArrayList<Player> players)
+    private void rollDice(Settings settings, GameBoard gameBoard)
     {
-        GameBoard gameBoard = new GameBoard(cells, players);
         for (Integer roll : settings.getRolls())
             gameBoard.roll(roll);
     }

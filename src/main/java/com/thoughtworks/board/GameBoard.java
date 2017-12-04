@@ -56,7 +56,6 @@ public class GameBoard
         int effectivePosition = (lastPosition + roll) % board.size();
         effectivePosition = effectivePosition == 0 ? board.size() : effectivePosition;
         player.move(effectivePosition);
-
     }
     private void selectNextPlayer()
     {

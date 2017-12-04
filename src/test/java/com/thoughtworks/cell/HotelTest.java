@@ -58,4 +58,14 @@ public class HotelTest
         assertEquals(850,owner.accountBalance());
     }
 
+    @Test
+    public void ownerLandsOnTheHotel() throws Exception
+    {
+        Player owner = new Player("");
+        Hotel hotel = new Hotel();
+        hotel.land(owner);
+        hotel.land(owner);
+        assertEquals(800,owner.accountBalance());
+    }
+
 }
