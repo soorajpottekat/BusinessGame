@@ -1,4 +1,4 @@
-package com.thoughtworks.game;
+package com.thoughtworks.board;
 /*
  * Copyright (c) Multichoice Technical Operations. All Rights Reserved.
  *
@@ -27,12 +27,12 @@ import java.util.List;
  *
  * @author Sooraj Pottekat
  */
-public class BusinessGame
+public class GameBoard
 {
     private final List<Player> players;
     private List<Cell> board;
     private int currentPlayerIndex;
-    public BusinessGame(List<Cell> board, List<Player> players)
+    public GameBoard(List<Cell> board, List<Player> players)
     {
         if(players.size() < 2)
             throw new IllegalArgumentException("Minimum two players required to start the game");

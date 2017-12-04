@@ -20,9 +20,9 @@ import com.thoughtworks.cell.CellFactoryTest;
 import com.thoughtworks.cell.EmptyTest;
 import com.thoughtworks.cell.HotelTest;
 import com.thoughtworks.cell.JailTest;
-import com.thoughtworks.game.BusinessGameTest;
+import com.thoughtworks.board.GameBoardTest;
+import com.thoughtworks.input.PropertyFileReaderTest;
 import com.thoughtworks.player.PlayerTest;
-import com.thoughtworks.settings.Settings;
 import com.thoughtworks.settings.SettingsTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -34,13 +34,14 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 
 @SuiteClasses({
-        BusinessGameTest.class,
+        GameBoardTest.class,
         PlayerTest.class,
         CellFactoryTest.class,
         EmptyTest.class,
         HotelTest.class,
         JailTest.class,
-        SettingsTest.class
+        SettingsTest.class,
+        PropertyFileReaderTest.class
 })
 public class TestSuite
 {

@@ -1,4 +1,4 @@
-package com.thoughtworks.game;/*
+package com.thoughtworks.board;/*
  * Copyright (c) Multichoice Technical Operations. All Rights Reserved.
  *
  * This software is the confidential and proprietary information of
@@ -15,6 +15,7 @@ package com.thoughtworks.game;/*
  * OF USING, MODIFYING OR DISTRIBUTING THIS SOFTWARE OR ITS DERIVATIVES.
  */
 
+import com.thoughtworks.board.GameBoard;
 import com.thoughtworks.cell.Cell;
 import com.thoughtworks.cell.CellFactory;
 import com.thoughtworks.player.Player;
@@ -32,9 +33,9 @@ import static org.junit.Assert.assertEquals;
  *
  * @author Sooraj Pottekat
  */
-public class BusinessGameTest
+public class GameBoardTest
 {
-    private BusinessGame businessGame;
+    private GameBoard gameBoard;
     private Player firstPlayer;
     private Player secondPlayer;
     private ArrayList<Player> players;
@@ -51,12 +52,12 @@ public class BusinessGameTest
     private void initialiseBoard(List<String> input)
     {
         List<Cell> cells = new CellFactory().createCells(input);
-        businessGame = new BusinessGame(cells,players);
+        gameBoard = new GameBoard(cells,players);
     }
 
     private void verifyRoll(int roll,int position)
     {
-        businessGame.roll(roll);
+        gameBoard.roll(roll);
         assertEquals(position,firstPlayer.position());
     }
 
@@ -65,14 +66,14 @@ public class BusinessGameTest
     public void rollInvalidZero() throws Exception
     {
         initialiseBoard(Arrays.asList("J"));
-        businessGame.roll(0);
+        gameBoard.roll(0);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void rollInvalidTwenty() throws Exception
     {
         initialiseBoard(Arrays.asList("T"));
-        businessGame.roll(20);
+        gameBoard.roll(20);
     }
 
     @Test
@@ -110,15 +111,15 @@ public class BusinessGameTest
     @Test(expected = IllegalArgumentException.class)
     public void initialiseGameWithPlayers() throws Exception
     {
-        new BusinessGame(null,new ArrayList<Player>());
+        new GameBoard(null,new ArrayList<Player>());
     }
     @Test
     public void firstPlayerRollTwoTwos() throws Exception
     {
         initialiseBoard((Arrays.asList("E","J","H","T","T","J")));
-        businessGame.roll(2);
-        businessGame.roll(2);
-        businessGame.roll(2);
+        gameBoard.roll(2);
+        gameBoard.roll(2);
+        gameBoard.roll(2);
         assertEquals(4,firstPlayer.position());
     }
 
@@ -126,15 +127,15 @@ public class BusinessGameTest
     public void secondPlayerRollsOneTwo() throws Exception
     {
         initialiseBoard((Arrays.asList("E","J","H","T","T","J")));
-        businessGame.roll(2);
-        businessGame.roll(2);
+        gameBoard.roll(2);
+        gameBoard.roll(2);
         assertEquals(2,secondPlayer.position());
     }
     @Test
     public void landOnHotelAndEffectiveBalanceIsSame() throws Exception
     {
         initialiseBoard((Arrays.asList("E","H","H","T","T","J")));
-        businessGame.roll(2);
+        gameBoard.roll(2);
         assertEquals(firstPlayer.effectiveBalance(),1000);
     }
 
@@ -142,8 +143,8 @@ public class BusinessGameTest
     public void landsOnPreOwnedHotel() throws Exception
     {
         initialiseBoard((Arrays.asList("E","H","H","T","T","J")));
-        businessGame.roll(2);
-        businessGame.roll(2);
+        gameBoard.roll(2);
+        gameBoard.roll(2);
         assertEquals(firstPlayer.effectiveBalance(),1050);
         assertEquals(secondPlayer.accountBalance(),950);
     }
