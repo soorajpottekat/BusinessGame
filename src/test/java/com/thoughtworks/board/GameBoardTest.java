@@ -44,8 +44,8 @@ public class GameBoardTest
     public void setUp()
     {
         players = new ArrayList<Player>();
-        firstPlayer = new Player();
-        secondPlayer = new Player();
+        firstPlayer = new Player("");
+        secondPlayer = new Player("");
         players.add(firstPlayer);
         players.add(secondPlayer);
     }

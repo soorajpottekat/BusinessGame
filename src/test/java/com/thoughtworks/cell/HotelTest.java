@@ -32,7 +32,7 @@ public class HotelTest
     @Test
     public void landNonOwnedHotel() throws Exception
     {
-        Player player = new Player();
+        Player player = new Player("");
         new Hotel().land(player);
         assertEquals(800,player.accountBalance());
     }
@@ -40,7 +40,7 @@ public class HotelTest
     @Test
     public void landNonOwnedHotelWithNotEnoughBalance() throws Exception
     {
-        Player player = new Player();
+        Player player = new Player("");
         player.updateBalance(-801);
         new Hotel().land(player);
         assertEquals(199,player.accountBalance());
@@ -49,8 +49,8 @@ public class HotelTest
     @Test
     public void landOnPreOwnedHotel() throws Exception
     {
-        Player owner = new Player();
-        Player visitor = new Player();
+        Player owner = new Player("");
+        Player visitor = new Player("");
         Hotel hotel = new Hotel();
         hotel.land(owner);
         hotel.land(visitor);

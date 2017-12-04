@@ -32,7 +32,7 @@ public class JailTest
     @Test
     public void land() throws Exception
     {
-        Player player = new Player();
+        Player player = new Player("");
         new Jail().land(player);
         assertEquals(850,player.accountBalance());
     }

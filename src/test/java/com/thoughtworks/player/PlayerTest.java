@@ -44,33 +44,33 @@ public class PlayerTest
     @Test
     public void position() throws Exception
     {
-        int position = new Player().position();
+        int position = new Player("").position();
         assertEquals(0,position);
     }
     @Test
     public void movePlayer() throws Exception
     {
-        Player player = new Player();
+        Player player = new Player("");
         player.move(4);
         assertEquals(4,player.position());
     }
     @Test
     public void testInitialBalance() throws Exception
     {
-        Player player = new Player();
+        Player player = new Player("");
         assertEquals(1000,player.accountBalance());
     }
     @Test
     public void addPositiveBalance() throws Exception
     {
-        Player player = new Player();
+        Player player = new Player("");
         player.updateBalance(200);
         assertEquals(1200,player.accountBalance());
     }
     @Test
     public void buyItem() throws Exception
     {
-        Player player = new Player();
+        Player player = new Player("");
         Purchasable purchasableItem = getPurchasableItem(200);
         player.purchaseItem(purchasableItem);
         assertEquals(1000,player.effectiveBalance());
@@ -79,7 +79,7 @@ public class PlayerTest
     @Test
     public void buyMultipleItem() throws Exception
     {
-        Player player = new Player();
+        Player player = new Player("");
         Purchasable purchasableItem1 = getPurchasableItem(200);
         Purchasable purchasableItem2 = getPurchasableItem(300);
         player.purchaseItem(purchasableItem1);

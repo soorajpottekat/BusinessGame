@@ -25,13 +25,15 @@ import java.util.ArrayList;
  */
 public class Player
 {
+    private final String name;
     private int balance;
     private int position;
     private ArrayList<Purchasable> ownedItems;
-    public Player()
+    public Player(String name)
     {
         this.position = 0;
         this.balance = 1000;
+        this.name = name;
         this.ownedItems = new ArrayList<Purchasable>();
     }
 
@@ -69,5 +71,10 @@ public class Player
             effectiveBalance += item.getValue();
         }
         return effectiveBalance;
+    }
+
+    public String getName()
+    {
+        return name;
     }
 }
