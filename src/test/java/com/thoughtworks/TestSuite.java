@@ -23,6 +23,7 @@ import com.thoughtworks.cell.JailTest;
 import com.thoughtworks.board.GameBoardTest;
 import com.thoughtworks.input.PropertyFileReaderTest;
 import com.thoughtworks.output.ResultsPrinterTest;
+import com.thoughtworks.player.PlayerComparatorTest;
 import com.thoughtworks.player.PlayerTest;
 import com.thoughtworks.settings.SettingsTest;
 import org.junit.runner.RunWith;
@@ -30,7 +31,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * Created by soorajpottekat on 30/03/17.
+ * Created by soorajpottekat on 12/4/2017.
  */
 @RunWith(Suite.class)
 
